@@ -1,0 +1,2612 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Small Duck Climbing Toy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="https://storage.biddabari.online/biddabari-bucket/uploads/all/4PCgKQGv93MGiJXMIdyMFGboRpRR2GV8YNam0JIE.webp"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "toy-yellow": "#FFB000",
+              "toy-blue": "#2196F3",
+              "toy-pink": "#FF6B81",
+              "toy-dark": "#1E293B",
+              "toy-deep-blue": "#0F172A",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f8fafc;
+        font-family: "Anek Bangla", sans-serif;
+        overflow-x: hidden;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        padding-top: 46px;
+      }
+      @media (min-width: 768px) {
+        body {
+          padding-top: 56px;
+        }
+      }
+
+      /* ============ HERO ============ */
+      @keyframes heroFadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(25px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes heroFloatSoft {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+      @keyframes heroPulseGlow {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.8;
+          transform: scale(1.05);
+        }
+      }
+      @keyframes heroWiggleButton {
+        0%,
+        100% {
+          transform: translateX(0) rotate(0) scale(1);
+        }
+        5%,
+        15%,
+        25% {
+          transform: translateX(-4px) rotate(-3deg) scale(1.05);
+        }
+        10%,
+        20%,
+        30% {
+          transform: translateX(4px) rotate(3deg) scale(1.05);
+        }
+        35% {
+          transform: translateX(0) rotate(0) scale(1);
+        }
+      }
+      .hero-animate-fade {
+        opacity: 0;
+        animation: heroFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .hero-delay-100 {
+        animation-delay: 0.15s;
+      }
+      .hero-delay-200 {
+        animation-delay: 0.3s;
+      }
+      .hero-float {
+        animation: heroFloatSoft 4s ease-in-out infinite;
+      }
+      .hero-red-cut {
+        position: relative;
+        display: inline-block;
+        color: #94a3b8;
+      }
+      .hero-red-cut::after {
+        content: "";
+        position: absolute;
+        left: -5%;
+        top: 50%;
+        width: 110%;
+        height: 2.5px;
+        background: #ef4444;
+        transform: rotate(-12deg);
+        border-radius: 2px;
+      }
+      .hero-tag-cut {
+        clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+        border-radius: 4px;
+      }
+      .hero-btn {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%);
+        transition: all 0.3s ease;
+        animation: heroWiggleButton 3s infinite ease-in-out;
+        z-index: 1;
+        text-decoration: none !important;
+      }
+      .hero-btn > * {
+        position: relative;
+        z-index: 2;
+      }
+      .hero-btn:hover {
+        transform: translateY(-3px) scale(1.02);
+        filter: brightness(1.1);
+        animation: none;
+        color: #fff !important;
+      }
+      .hero-btn:active {
+        transform: translateY(1px);
+      }
+      .hero-blob {
+        border-radius: 40% 60% 70% 30%/40% 50% 60% 50%;
+        animation: heroPulseGlow 6s ease-in-out infinite alternate;
+      }
+
+      /* ============ SHARED ============ */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(25px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in-up {
+        opacity: 0;
+        animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .delay-100 {
+        animation-delay: 0.1s;
+      }
+      .delay-200 {
+        animation-delay: 0.2s;
+      }
+      .delay-300 {
+        animation-delay: 0.3s;
+      }
+      .delay-400 {
+        animation-delay: 0.4s;
+      }
+      .delay-500 {
+        animation-delay: 0.5s;
+      }
+      .delay-600 {
+        animation-delay: 0.6s;
+      }
+
+      /* ============ FEATURES (dark) ============ */
+      @keyframes floatPulse {
+        0%,
+        100% {
+          opacity: 0.5;
+          transform: scale(1) translateY(0);
+        }
+        50% {
+          opacity: 0.8;
+          transform: scale(1.02) translateY(-15px);
+        }
+      }
+      .dark-glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: none !important;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .dark-glass-card:hover {
+        transform: translateY(-6px);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 176, 0, 0.5);
+      }
+      .icon-wrapper-gradient {
+        background: linear-gradient(135deg, #ffb000, #ff6b81);
+        box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .ambient-light {
+        animation: floatPulse 10s ease-in-out infinite alternate;
+      }
+      .curved-divider {
+        position: absolute;
+        top: -2px;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+      }
+      .curved-divider svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 40px;
+      }
+      @media (min-width: 768px) {
+        .curved-divider svg {
+          height: 60px;
+        }
+      }
+      .curved-divider .shape-fill {
+        fill: #f8fafc;
+      }
+      @keyframes shineEffect {
+        0% {
+          left: -150%;
+        }
+        20% {
+          left: 150%;
+        }
+        100% {
+          left: 150%;
+        }
+      }
+      .cta-btn {
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.2s ease,
+          filter 0.2s ease;
+        box-shadow: none !important;
+      }
+      .cta-btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -150%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.4) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        transform: skewX(-25deg);
+        animation: shineEffect 3s infinite;
+        z-index: 1;
+      }
+      .cta-btn > * {
+        position: relative;
+        z-index: 2;
+      }
+      .cta-btn:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.05);
+      }
+      .cta-btn:active {
+        transform: translateY(0);
+      }
+      .cta-main-btn {
+        animation: heroWiggleButton 3s infinite ease-in-out;
+      }
+      .cta-main-btn:hover {
+        animation: none;
+        transform: translateY(-2px) scale(1.02);
+      }
+
+      /* ============ OFFER TIMER ============ */
+      @keyframes pulseAlert {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 0.8;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      @keyframes shimmer {
+        0% {
+          background-position: -200% center;
+        }
+        100% {
+          background-position: 200% center;
+        }
+      }
+      .offer-glass-card {
+        background: linear-gradient(135deg, #9b0014 0%, #df1b3f 100%);
+        box-shadow: none !important;
+        position: relative;
+        overflow: hidden;
+      }
+      .offer-glass-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        background: linear-gradient(
+          to right,
+          transparent 0%,
+          rgba(255, 255, 255, 0.15) 50%,
+          transparent 100%
+        );
+        transform: skewX(-20deg);
+        animation: shimmer 6s infinite linear;
+        pointer-events: none;
+      }
+      .timer-box {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.1);
+      }
+      .pulse-dot {
+        animation: pulseAlert 1.5s infinite;
+      }
+      .cta-btn-effect {
+        animation: heroWiggleButton 3s infinite ease-in-out;
+      }
+      .cta-btn-effect:hover {
+        animation: none;
+        transform: translateY(-2px) scale(1.02);
+      }
+
+      /* ============ PACKAGE GRID ============ */
+      .premium-glass {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.45) 0%,
+          rgba(255, 255, 255, 0.25) 100%
+        );
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .premium-glass:hover {
+        transform: translateY(-8px);
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.6) 0%,
+          rgba(255, 255, 255, 0.4) 100%
+        );
+        border-color: rgba(33, 150, 243, 0.4);
+        box-shadow: 0 20px 40px rgba(33, 150, 243, 0.1);
+      }
+      .img-spotlight {
+        background: radial-gradient(
+          circle at center,
+          rgba(255, 255, 255, 0.9) 0%,
+          rgba(255, 255, 255, 0.4) 100%
+        );
+        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5);
+      }
+      .qty-badge-glow {
+        background: linear-gradient(135deg, #ffb000, #ff6b81);
+        box-shadow:
+          0 8px 16px -4px rgba(255, 107, 129, 0.5),
+          inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .blob-shape {
+        border-radius: 40% 60% 70% 30%/40% 50% 60% 50%;
+        animation: floatPulse 8s ease-in-out infinite alternate;
+      }
+
+      /* ============ FAQ ============ */
+      .faq-item {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        transition: all 0.3s ease;
+      }
+      .faq-item:hover {
+        background: #fff;
+        border-color: rgba(33, 150, 243, 0.3);
+      }
+      .faq-item.active {
+        background: #fff;
+        border-color: #2196f3;
+        box-shadow: 0 4px 20px rgba(33, 150, 243, 0.08);
+      }
+      .faq-answer-grid {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .faq-item.active .faq-answer-grid {
+        grid-template-rows: 1fr;
+      }
+      .faq-answer-inner {
+        overflow: hidden;
+      }
+      .faq-icon {
+        transition:
+          transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+          color 0.3s ease;
+        color: #94a3b8;
+      }
+      .faq-item.active .faq-icon {
+        transform: rotate(180deg);
+        color: #ff6b81;
+      }
+      .faq-item.active .faq-title {
+        color: #2196f3;
+      }
+
+      /* ============ CHECKOUT ============ */
+      .sa-wrapper {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+      .sa-row {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .sa-col-left {
+        flex: 1 1 55%;
+        min-width: 300px;
+      }
+      .sa-col-right {
+        flex: 1 1 38%;
+        min-width: 280px;
+      }
+      .sa-heading {
+        font-weight: 800;
+        font-size: 16px;
+        color: #1e293b;
+        margin: 14px 0 8px;
+      }
+      .sa-pc-card-hz {
+        display: flex;
+        gap: 12px;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 12px;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      }
+      .sa-pc-card-hz-img {
+        width: 84px;
+        height: 84px;
+        flex-shrink: 0;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #f1f5f9;
+      }
+      .sa-pc-card-hz-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .sa-pc-card-hz-content {
+        flex: 1;
+        position: relative;
+      }
+      .sa-pc-card-hz-title {
+        margin: 0 0 4px;
+        font-size: 15px;
+        font-weight: 800;
+        color: #1e293b;
+      }
+      .sa-discount-badge {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background: #ef4444;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 2px 8px;
+        border-radius: 999px;
+      }
+      .sa-pc-btn-wrap {
+        flex-shrink: 0;
+      }
+      .sa-pc-btn {
+        background: linear-gradient(135deg, #ff6b81, #ff3344);
+        color: #fff;
+        border: none;
+        padding: 9px 14px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+      }
+      .sa-pc-btn:hover {
+        filter: brightness(1.05);
+      }
+      .sa-qty-ctrl {
+        display: none;
+        align-items: center;
+        gap: 10px;
+        background: #f1f5f9;
+        border-radius: 10px;
+        padding: 4px 10px;
+      }
+      .sa-qty-ctrl.show {
+        display: flex;
+      }
+      .sa-qty-btn {
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        font-weight: 800;
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 1;
+      }
+      .sa-qty-val {
+        font-weight: 800;
+        min-width: 14px;
+        text-align: center;
+      }
+      .sa-rec-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 6px;
+      }
+      .sa-rec-card {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .sa-rec-img-wrap {
+        width: 70px;
+        height: 70px;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #f1f5f9;
+        margin-bottom: 6px;
+      }
+      .sa-rec-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .sa-rec-title {
+        font-size: 12.5px;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0 0 4px;
+        min-height: 32px;
+      }
+      .sa-rec-btn-wrap {
+        margin-top: 6px;
+        width: 100%;
+      }
+      .sa-rec-add-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 11.5px;
+        padding: 7px 8px;
+      }
+      .sa-input {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: 1.5px solid #e2e8f0;
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .sa-input:focus {
+        border-color: #2196f3;
+      }
+      .sa-input-group {
+        margin-bottom: 12px;
+      }
+      .sa-delivery-box {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 12px 14px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .sa-delivery-box.active {
+        border-color: #2196f3;
+        background: #eff6ff;
+      }
+      .sa-delivery-icon svg {
+        width: 26px;
+        height: 26px;
+        fill: #2196f3;
+      }
+      .sa-delivery-text strong {
+        display: block;
+        font-size: 14px;
+        color: #1e293b;
+      }
+      .sa-delivery-text span {
+        font-size: 12.5px;
+        color: #64748b;
+      }
+      .sa-radio-input {
+        accent-color: #2196f3;
+        width: 16px;
+        height: 16px;
+      }
+      .sa-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13.5px;
+        margin-top: 8px;
+      }
+      .sa-table th {
+        text-align: left;
+        color: #94a3b8;
+        font-weight: 700;
+        font-size: 11px;
+        text-transform: uppercase;
+        padding-bottom: 6px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .sa-table td {
+        padding: 6px 0;
+        color: #334155;
+        border-bottom: 1px dashed #e2e8f0;
+      }
+      .sa-table td:last-child {
+        text-align: right;
+        font-weight: 700;
+      }
+      .sa-total-row td {
+        font-size: 16px;
+        font-weight: 800;
+        color: #1e293b;
+        border-bottom: none;
+        padding-top: 10px;
+      }
+      .sa-btn {
+        width: 100%;
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: #fff;
+        border: none;
+        padding: 14px;
+        border-radius: 14px;
+        font-weight: 800;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 14px;
+        transition: all 0.2s;
+      }
+      .sa-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .sa-btn:not(:disabled):hover {
+        filter: brightness(1.05);
+        transform: translateY(-1px);
+      }
+      .sa-mobile-sticky {
+        display: none;
+      }
+      @media (max-width: 900px) {
+        .sa-mobile-sticky {
+          display: flex;
+          position: sticky;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          background: #fff;
+          border-top: 1px solid #e2e8f0;
+          padding: 10px 14px;
+          align-items: center;
+          justify-content: space-between;
+          box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+          z-index: 40;
+          margin-top: 10px;
+          border-radius: 16px 16px 0 0;
+        }
+        .sa-btn-desktop {
+          display: none;
+        }
+      }
+      .sa-mobile-price {
+        display: flex;
+        align-items: center;
+        color: #1e293b;
+        font-weight: 800;
+      }
+      .sa-mobile-btn {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+      }
+      .sa-mobile-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .sa-success-banner {
+        display: none;
+        background: #ecfdf5;
+        border: 1.5px solid #10b981;
+        color: #065f46;
+        padding: 14px 16px;
+        border-radius: 14px;
+        font-weight: 700;
+        margin-top: 14px;
+        text-align: center;
+      }
+      .sa-success-banner.show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ============================================================ HERO ============================================================ -->
+    <section
+      id="duck-toy-hero"
+      class="relative overflow-hidden bg-[#FAFBFF] w-full"
+    >
+      <div class="absolute inset-0 z-0 pointer-events-none">
+        <div
+          class="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-[#2196F3]/20 blur-[80px]"
+        ></div>
+        <div
+          class="absolute top-20 -right-40 w-[600px] h-[600px] rounded-full bg-[#FF6B81]/20 blur-[80px]"
+        ></div>
+        <div
+          class="absolute -bottom-40 left-1/2 w-[400px] h-[400px] rounded-full bg-[#FFB000]/25 blur-[80px]"
+        ></div>
+      </div>
+
+      <div
+        class="max-w-7xl mx-auto px-5 md:px-8 pt-6 md:pt-10 pb-8 md:pb-12 relative z-10"
+      >
+        <div class="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 items-center">
+          <div class="relative order-2 lg:order-1">
+            <h1
+              class="hero-animate-fade text-center md:text-left text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#1E293B] leading-[1.3]"
+            >
+              সোনামণির একঘেয়েমি কাটিয়ে মুখে হাসি ফোটাতে
+              <span
+                class="block mt-2 md:mt-3 text-2xl md:text-3xl lg:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#2196F3] to-[#A855F7]"
+              >
+                Small Duck Climbing Toy
+              </span>
+            </h1>
+
+            <p
+              class="hero-animate-fade hero-delay-100 mt-3 md:mt-4 mx-auto md:mx-0 text-center md:text-left text-sm md:text-base text-slate-600 leading-relaxed max-w-lg font-medium"
+            >
+              মিউজিক আর লাইটের তালে কিউট হাঁসগুলোর মজার স্লাইড! বাচ্চাকে স্ক্রিন
+              থেকে দূরে রাখার দারুণ উপায়।
+            </p>
+
+            <div
+              class="hero-animate-fade hero-delay-200 mt-5 md:mt-6 p-4 md:p-5 bg-white/40 backdrop-blur-md rounded-3xl border border-white/60 shadow-sm relative overflow-hidden"
+            >
+              <div
+                class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-center sm:text-left"
+              >
+                <div class="flex flex-col items-center sm:items-start">
+                  <div
+                    class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1"
+                  >
+                    অফার মূল্য
+                  </div>
+                  <div
+                    class="flex items-end justify-center sm:justify-start gap-2"
+                  >
+                    <span
+                      class="text-3xl md:text-4xl font-extrabold text-[#1E293B] leading-none"
+                      >৭৯৯৳</span
+                    >
+                    <span class="text-lg font-bold hero-red-cut mb-1"
+                      >১৯০০৳</span
+                    >
+                  </div>
+                  <div
+                    class="inline-block mt-2 bg-green-100/80 text-[#2E7D32] px-3 py-1 hero-tag-cut text-xs md:text-sm font-extrabold"
+                  >
+                    সাশ্রয় ১১০১৳ (৫৮%)
+                  </div>
+                </div>
+                <a
+                  href="#sa-checkout-area"
+                  class="hero-btn w-full sm:w-auto inline-flex items-center justify-center text-white font-extrabold text-base md:text-lg px-6 py-3.5 rounded-2xl cursor-pointer"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-5 h-5 mr-2 relative z-10"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="8" cy="21" r="1" />
+                    <circle cx="19" cy="21" r="1" />
+                    <path
+                      d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+                    />
+                  </svg>
+                  <span class="relative z-10">এখনই অর্ডার করুন</span>
+                </a>
+              </div>
+              <div
+                class="mt-4 pt-3 border-t border-slate-300/40 flex flex-wrap justify-center sm:justify-start items-center gap-3 text-[11px] md:text-sm font-medium text-slate-600"
+              >
+                <span class="flex items-center gap-1.5">
+                  <svg
+                    class="w-3.5 h-3.5 text-green-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  ক্যাশ অন ডেলিভারি
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <svg
+                    class="w-3.5 h-3.5 text-green-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  সারা দেশে হোম ডেলিভারি
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="hero-animate-fade hero-delay-100 relative order-1 lg:order-2"
+          >
+            <div
+              class="relative w-full aspect-square max-w-[280px] md:max-w-[420px] mx-auto"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-tr from-blue-100 to-pink-50 hero-blob hero-float"
+                style="animation-duration: 7s"
+              ></div>
+              <div
+                class="absolute inset-4 bg-white/60 backdrop-blur-md hero-blob hero-float"
+                style="animation-duration: 5s; animation-direction: reverse"
+              ></div>
+              <div
+                class="absolute inset-8 rounded-full border-2 border-dashed border-[#2196F3]/20 animate-[spin_30s_linear_infinite]"
+              ></div>
+              <div
+                class="absolute inset-0 flex items-center justify-center p-4 md:p-8"
+              >
+                <img
+                  decoding="async"
+                  src="https://shop.prodhan.com/wp-content/uploads/2026/04/Untitled-design-2.png"
+                  alt="Small Duck Climbing Toy"
+                  class="relative z-10 w-full h-full object-contain hero-float"
+                />
+              </div>
+              <div
+                class="absolute top-2 md:top-10 -right-2 md:right-0 lg:-right-6 bg-white px-3 md:px-4 py-1.5 md:py-2 rounded-2xl z-20 flex items-center gap-1.5 md:gap-2 border border-slate-200 shadow-sm hero-float scale-90 md:scale-100 origin-right"
+                style="animation-delay: 1s"
+              >
+                <div
+                  class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-50 flex items-center justify-center text-sm md:text-lg"
+                >
+                  🎵
+                </div>
+                <div>
+                  <div
+                    class="text-[8px] md:text-[10px] text-slate-400 font-bold uppercase leading-tight"
+                  >
+                    মিউজিক ও লাইট
+                  </div>
+                  <div
+                    class="text-xs md:text-sm font-extrabold text-[#1E293B] leading-tight"
+                  >
+                    LED Music
+                  </div>
+                </div>
+              </div>
+              <div
+                class="absolute bottom-2 md:bottom-12 -left-2 md:left-0 lg:-left-6 bg-white px-3 md:px-4 py-1.5 md:py-2 rounded-2xl z-20 flex items-center gap-1.5 md:gap-2 border border-slate-200 shadow-sm hero-float scale-90 md:scale-100 origin-left"
+                style="animation-delay: 2s"
+              >
+                <div
+                  class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-yellow-50 flex items-center justify-center text-sm md:text-lg"
+                >
+                  🦆
+                </div>
+                <div>
+                  <div
+                    class="text-[8px] md:text-[10px] text-slate-400 font-bold uppercase leading-tight"
+                  >
+                    সাথে থাকছে
+                  </div>
+                  <div
+                    class="text-xs md:text-sm font-extrabold text-[#1E293B] leading-tight"
+                  >
+                    ৯টি কিউট হাঁস
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ FEATURES (dark) ============================================================ -->
+    <section
+      class="py-10 md:py-14 bg-toy-deep-blue text-white relative overflow-hidden"
+    >
+      <div class="curved-divider">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path
+            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+            class="shape-fill"
+          ></path>
+        </svg>
+      </div>
+      <div
+        class="absolute top-20 -left-20 w-[400px] h-[400px] rounded-full bg-toy-blue/20 blur-[100px] ambient-light"
+      ></div>
+      <div
+        class="absolute bottom-10 -right-20 w-[500px] h-[500px] rounded-full bg-toy-pink/15 blur-[100px] ambient-light"
+        style="animation-delay: -5s"
+      ></div>
+
+      <div class="max-w-7xl mx-auto px-5 md:px-8 relative z-10 pt-4 md:pt-6">
+        <div class="text-center mb-8 md:mb-10 animate-fade-in-up">
+          <h2
+            class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight"
+          >
+            মূল <span class="text-toy-yellow">ফিচারসমূহ</span>
+          </h2>
+          <p
+            class="mt-2.5 md:mt-3 text-slate-300 font-medium text-[13px] md:text-base max-w-lg mx-auto leading-relaxed"
+          >
+            প্রতিটি ডিটেইল বাচ্চাদের কথা ভেবে সাজানো হয়েছে, যাতে তাদের খেলার
+            সময়টা হয় নিরাপদ ও আনন্দময়।
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-5">
+          <div
+            class="dark-glass-card group animate-fade-in-up delay-100 rounded-2xl md:rounded-3xl p-3 md:p-5 flex flex-col relative overflow-hidden"
+          >
+            <div class="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+              <div
+                class="shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-[8px] md:rounded-xl icon-wrapper-gradient flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 h-4 md:w-6 md:h-6 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg>
+              </div>
+              <h3
+                class="text-[12px] sm:text-[14px] md:text-lg font-extrabold text-white leading-tight group-hover:text-toy-yellow transition-colors"
+              >
+                অটোমেটিক ক্লাইম্বিং সিস্টেম
+              </h3>
+            </div>
+            <p
+              class="text-[10px] sm:text-[11px] md:text-[13px] text-slate-300 font-medium leading-relaxed opacity-90"
+            >
+              হাঁসগুলো স্বয়ংক্রিয়ভাবে সিঁড়ি বেয়ে উঠে আবার স্লাইড ট্র্যাক
+              দিয়ে মসৃণভাবে নেমে আসে।
+            </p>
+          </div>
+
+          <div
+            class="dark-glass-card group animate-fade-in-up delay-200 rounded-2xl md:rounded-3xl p-3 md:p-5 flex flex-col relative overflow-hidden"
+          >
+            <div class="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+              <div
+                class="shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-[8px] md:rounded-xl icon-wrapper-gradient flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 h-4 md:w-6 md:h-6 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"
+                  />
+                  <path d="M9 18h6" />
+                  <path d="M10 22h4" />
+                </svg>
+              </div>
+              <h3
+                class="text-[12px] sm:text-[14px] md:text-lg font-extrabold text-white leading-tight group-hover:text-toy-yellow transition-colors"
+              >
+                কালারফুল LED লাইট
+              </h3>
+            </div>
+            <p
+              class="text-[10px] sm:text-[11px] md:text-[13px] text-slate-300 font-medium leading-relaxed opacity-90"
+            >
+              সিঁড়ির প্রতিটি ধাপে আকর্ষণীয় ফ্ল্যাশিং LED আলো, যা বাচ্চাদের
+              দৃষ্টি মুহূর্তেই ধরে রাখবে।
+            </p>
+          </div>
+
+          <div
+            class="dark-glass-card group animate-fade-in-up delay-300 rounded-2xl md:rounded-3xl p-3 md:p-5 flex flex-col relative overflow-hidden"
+          >
+            <div class="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+              <div
+                class="shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-[8px] md:rounded-xl icon-wrapper-gradient flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 h-4 md:w-6 md:h-6 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="8" cy="18" r="4" />
+                  <path d="M12 18V2l7 4" />
+                </svg>
+              </div>
+              <h3
+                class="text-[12px] sm:text-[14px] md:text-lg font-extrabold text-white leading-tight group-hover:text-toy-yellow transition-colors"
+              >
+                আনন্দদায়ক মিউজিক
+              </h3>
+            </div>
+            <p
+              class="text-[10px] sm:text-[11px] md:text-[13px] text-slate-300 font-medium leading-relaxed opacity-90"
+            >
+              বিল্ট-ইন মিউজিক সিস্টেম সহ — খেলার সময় মজার ও মিষ্টি সুর বাজবে
+              অবিরাম।
+            </p>
+          </div>
+
+          <div
+            class="dark-glass-card group animate-fade-in-up delay-400 rounded-2xl md:rounded-3xl p-3 md:p-5 flex flex-col relative overflow-hidden"
+          >
+            <div class="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+              <div
+                class="shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-[8px] md:rounded-xl icon-wrapper-gradient flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 h-4 md:w-6 md:h-6 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" />
+                  <path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+                  <path d="M12 2v2" />
+                  <path d="M12 22v-2" />
+                  <path d="m17 20.66-1-1.73" />
+                  <path d="M11 10.27 7 3.34" />
+                  <path d="m20.66 17-1.73-1" />
+                  <path d="m3.34 7 1.73 1" />
+                  <path d="M14 12h8" />
+                  <path d="M2 12h2" />
+                  <path d="m20.66 7-1.73 1" />
+                  <path d="m3.34 17 1.73-1" />
+                  <path d="m17 3.34-1 1.73" />
+                  <path d="m11 13.73-4 6.93" />
+                </svg>
+              </div>
+              <h3
+                class="text-[12px] sm:text-[14px] md:text-lg font-extrabold text-white leading-tight group-hover:text-toy-yellow transition-colors"
+              >
+                স্মুথ মেটাল রোলার
+              </h3>
+            </div>
+            <p
+              class="text-[10px] sm:text-[11px] md:text-[13px] text-slate-300 font-medium leading-relaxed opacity-90"
+            >
+              ৯টি হাঁসের প্রতিটির নিচে রয়েছে মেটাল রোলার, যা ট্র্যাকে মসৃণ
+              স্লাইডিং নিশ্চিত করে।
+            </p>
+          </div>
+
+          <div
+            class="dark-glass-card group animate-fade-in-up delay-500 rounded-2xl md:rounded-3xl p-3 md:p-5 flex flex-col relative overflow-hidden"
+          >
+            <div class="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+              <div
+                class="shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-[8px] md:rounded-xl icon-wrapper-gradient flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 h-4 md:w-6 md:h-6 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                  />
+                </svg>
+              </div>
+              <h3
+                class="text-[12px] sm:text-[14px] md:text-lg font-extrabold text-white leading-tight group-hover:text-toy-yellow transition-colors"
+              >
+                সহজ অ্যাসেম্বলি
+              </h3>
+            </div>
+            <p
+              class="text-[10px] sm:text-[11px] md:text-[13px] text-slate-300 font-medium leading-relaxed opacity-90"
+            >
+              ৩টি স্লাইডার ট্র্যাক সহজেই জোড়া লাগানো যায় — বাচ্চারা বড়দের
+              সাহায্য ছাড়াই সেটআপ করতে পারবে।
+            </p>
+          </div>
+
+          <div
+            class="dark-glass-card group animate-fade-in-up delay-600 rounded-2xl md:rounded-3xl p-3 md:p-5 flex flex-col relative overflow-hidden"
+          >
+            <div class="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+              <div
+                class="shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-[8px] md:rounded-xl icon-wrapper-gradient flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 h-4 md:w-6 md:h-6 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                  />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+              </div>
+              <h3
+                class="text-[12px] sm:text-[14px] md:text-lg font-extrabold text-white leading-tight group-hover:text-toy-yellow transition-colors"
+              >
+                ১০০% নিরাপদ ABS প্লাস্টিক
+              </h3>
+            </div>
+            <p
+              class="text-[10px] sm:text-[11px] md:text-[13px] text-slate-300 font-medium leading-relaxed opacity-90"
+            >
+              নন-টক্সিক ম্যাটেরিয়ালে তৈরি, কোনো ধারালো প্রান্ত নেই — বাচ্চাদের
+              জন্য সম্পূর্ণ নিরাপদ।
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 md:mt-10 max-w-sm md:max-w-md mx-auto flex flex-col gap-3 animate-fade-in-up delay-600"
+        >
+          <a
+            href="#sa-checkout-area"
+            class="cta-btn cta-main-btn w-full bg-gradient-to-r from-toy-pink to-[#FF3344] text-white rounded-xl py-2 md:py-2.5 px-6 flex items-center justify-center gap-2.5 border border-white/10"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-6 h-6 shrink-0"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="8" cy="21" r="1" />
+              <circle cx="19" cy="21" r="1" />
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              />
+            </svg>
+            <span
+              class="text-[20px] md:text-2xl font-extrabold tracking-wide pt-0.5"
+              >অর্ডার করতে চাই</span
+            >
+          </a>
+          <div class="flex gap-3 w-full">
+            <a
+              href="https://wa.link/s1j832"
+              target="_blank"
+              class="cta-btn flex-1 bg-gradient-to-r from-[#25D366] to-[#1DA851] text-white rounded-xl py-1.5 md:py-2 px-2 md:px-3 flex items-center justify-center gap-1.5 border border-white/10"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 md:w-5 md:h-5 shrink-0"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+                />
+              </svg>
+              <span class="text-[13px] md:text-[15px] font-bold pt-0.5"
+                >হোয়াটসঅ্যাপ</span
+              >
+            </a>
+            <a
+              href="tel:+8809643330000"
+              class="cta-btn flex-1 bg-gradient-to-r from-toy-blue to-[#0066FF] text-white rounded-xl py-1.5 md:py-2 px-2 md:px-3 flex items-center justify-center gap-1.5 border border-white/10"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 md:w-5 md:h-5 shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                />
+              </svg>
+              <span class="text-[13px] md:text-[15px] font-bold pt-0.5"
+                >কল করুন</span
+              >
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ OFFER TIMER ============================================================ -->
+    <div
+      id="sticky-offer-header"
+      class="fixed top-0 left-0 w-full bg-gradient-to-r from-[#9B0014] to-[#DF1B3F] text-white z-[100] transform -translate-y-full transition-transform duration-300 ease-in-out shadow-xl px-3 md:px-5 py-2.5 md:py-3 flex items-center justify-between border-b border-white/20"
+    >
+      <div class="flex items-center gap-2 md:gap-4">
+        <div class="flex items-baseline gap-0.5 md:gap-1">
+          <span
+            class="text-[16px] md:text-xl font-extrabold text-toy-yellow leading-none"
+            >৭৯৯</span
+          >
+          <span class="text-[10px] md:text-sm font-bold text-toy-yellow"
+            >টাকা</span
+          >
+        </div>
+        <div class="h-4 w-px bg-white/30 hidden sm:block"></div>
+        <div class="h-3 w-px bg-white/30 sm:hidden"></div>
+        <div class="flex items-center gap-1 md:gap-1.5">
+          <span
+            class="text-[9px] md:hidden font-medium text-white/90 whitespace-nowrap pt-0.5"
+            >সীমিত সময়ের জন্য:</span
+          >
+          <div
+            class="flex items-center gap-0.5 md:gap-1 font-extrabold text-white text-[14px] md:text-lg"
+          >
+            <span id="sticky-offer-mins">00</span
+            ><span class="animate-pulse">:</span
+            ><span id="sticky-offer-secs">00</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <a
+          href="#sa-checkout-area"
+          class="cta-btn-effect bg-white text-toy-pink hover:bg-toy-yellow hover:text-toy-dark transition-all duration-300 py-1.5 md:py-2 px-3 md:px-5 rounded-lg font-extrabold text-[12px] md:text-[14px] shadow-sm flex items-center gap-1.5 whitespace-nowrap"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-3.5 h-3.5 md:w-4 md:h-4 hidden sm:block"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="8" cy="21" r="1" />
+            <circle cx="19" cy="21" r="1" />
+            <path
+              d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+            />
+          </svg>
+          অফারটি লুফে নিন
+        </a>
+      </div>
+    </div>
+
+    <section
+      id="main-offer-section"
+      class="py-4 md:py-6 bg-transparent relative overflow-hidden"
+    >
+      <div class="max-w-[900px] mx-auto px-4 md:px-8 relative z-10">
+        <div
+          class="offer-glass-card animate-fade-in-up rounded-xl md:rounded-[1.5rem] p-4 md:p-6 lg:p-7 text-white flex flex-col md:flex-row items-center justify-between gap-2.5 md:gap-5 border border-white/30"
+        >
+          <div class="text-center md:text-left flex-1 relative z-10">
+            <div
+              class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] md:text-[12px] font-bold uppercase tracking-widest mb-1 md:mb-2.5 border border-white/40"
+            >
+              <div class="w-2 h-2 rounded-full bg-toy-yellow pulse-dot"></div>
+              সীমিত সময়ের অফার
+            </div>
+            <h2
+              class="text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-tight mb-0.5 md:mb-1.5"
+            >
+              স্পেশাল ডিসকাউন্ট অফার!
+            </h2>
+            <div
+              class="flex items-end justify-center md:justify-start gap-2 mt-1.5 mb-2 md:my-3"
+            >
+              <span
+                class="text-base md:text-lg font-bold text-white/60 line-through decoration-white/40 decoration-2 pb-1"
+                >১৯০০ টাকা</span
+              >
+              <div class="flex items-baseline gap-1">
+                <span
+                  class="text-3xl md:text-4xl font-extrabold text-toy-yellow drop-shadow-lg leading-none"
+                  >৭৯৯</span
+                >
+                <span class="text-lg md:text-xl font-bold text-toy-yellow"
+                  >টাকা</span
+                >
+              </div>
+              <span
+                class="bg-white text-[#DF1B3F] text-[9px] md:text-[11px] font-extrabold px-1.5 py-0.5 rounded shadow-sm mb-1.5 animate-pulse uppercase tracking-wider"
+                >এখন!</span
+              >
+            </div>
+            <p
+              class="text-[12px] md:text-[14px] font-medium text-white/90 leading-snug md:leading-normal"
+            >
+              স্টক ফুরিয়ে যাওয়ার আগেই অর্ডার কনফার্ম করুন। অফারটি শেষ হতে আর
+              বাকি:
+            </p>
+          </div>
+
+          <div class="flex flex-col items-center shrink-0 relative z-10 mt-0">
+            <div
+              class="md:hidden text-[10px] font-bold text-white/90 mb-1.5 uppercase tracking-wide"
+            >
+              সীমিত সময়ের জন্য:
+            </div>
+            <div class="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+              <div class="flex flex-col items-center">
+                <div
+                  class="timer-box w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl flex items-center justify-center"
+                >
+                  <span
+                    id="offer-mins"
+                    class="text-2xl md:text-3xl font-extrabold tracking-tighter"
+                    >00</span
+                  >
+                </div>
+                <span
+                  class="text-[10px] md:text-[11px] font-bold uppercase tracking-wider mt-0.5 md:mt-1.5 text-white/80"
+                  >মিনিট</span
+                >
+              </div>
+              <div
+                class="text-xl md:text-2xl font-extrabold mb-3 md:mb-5 text-white/60 animate-pulse"
+              >
+                :
+              </div>
+              <div class="flex flex-col items-center">
+                <div
+                  class="timer-box w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl flex items-center justify-center"
+                >
+                  <span
+                    id="offer-secs"
+                    class="text-2xl md:text-3xl font-extrabold tracking-tighter"
+                    >00</span
+                  >
+                </div>
+                <span
+                  class="text-[10px] md:text-[11px] font-bold uppercase tracking-wider mt-0.5 md:mt-1.5 text-white/80"
+                  >সেকেন্ড</span
+                >
+              </div>
+            </div>
+            <a
+              href="#sa-checkout-area"
+              class="cta-btn-effect w-full bg-white text-toy-pink hover:bg-toy-yellow hover:text-toy-dark transition-all duration-300 py-1.5 md:py-2.5 px-4 rounded-xl font-extrabold text-[15px] md:text-[16px] text-center shadow-lg shadow-black/10 flex items-center justify-center gap-1.5"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 md:w-5 md:h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="8" cy="21" r="1" />
+                <circle cx="19" cy="21" r="1" />
+                <path
+                  d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+                />
+              </svg>
+              অফারটি লুফে নিন
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ PACKAGE GRID ============================================================ -->
+    <section class="py-8 md:py-12 bg-transparent relative overflow-hidden">
+      <div
+        class="absolute top-0 -left-20 w-[400px] md:w-[500px] h-[400px] md:h-[500px] rounded-full bg-toy-blue/15 blur-[90px] -z-10 blob-shape"
+      ></div>
+      <div
+        class="absolute bottom-0 -right-20 w-[450px] md:w-[600px] h-[450px] md:h-[600px] rounded-full bg-toy-pink/10 blur-[90px] -z-10 blob-shape"
+        style="animation-delay: -2s; animation-duration: 10s"
+      ></div>
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-toy-yellow/10 blur-[80px] -z-10 blob-shape"
+        style="animation-delay: -4s"
+      ></div>
+
+      <div class="max-w-7xl mx-auto px-5 md:px-8 relative z-10">
+        <div class="text-center mb-6 md:mb-10 animate-fade-in-up">
+          <h2
+            class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-toy-dark tracking-tight leading-tight"
+          >
+            প্রতিটি ডিটেইল,
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-toy-blue to-purple-500"
+              >এক বক্সে কমপ্লিট!</span
+            >
+          </h2>
+          <p
+            class="mt-3 text-slate-500 font-medium text-sm md:text-base max-w-lg mx-auto leading-relaxed"
+          >
+            বাচ্চার খেলার জন্য যা যা প্রয়োজন, তার সবই থাকছে এই একটি প্রিমিয়াম
+            বক্সে। সেটআপ করা একদম সহজ।
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
+          <div
+            class="premium-glass group animate-fade-in-up delay-100 rounded-[1.25rem] md:rounded-[2rem] flex flex-col relative overflow-hidden"
+          >
+            <div
+              class="w-full aspect-square img-spotlight bg-white/20 flex items-center justify-center relative overflow-hidden border-b border-white/40"
+            >
+              <img
+                decoding="async"
+                src="https://media.base44.com/images/public/user_69e3646d8e6da690d1e2ae37/cf2faad6d_SmallDuck-Coverv20.jpg"
+                alt="মেইন সিঁড়ির বেস"
+                class="w-full h-full object-cover mix-blend-darken transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
+            <div
+              class="flex items-center gap-2 md:gap-3 w-full text-left p-2.5 sm:p-3 md:p-5"
+            >
+              <div
+                class="shrink-0 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-[8px] md:rounded-xl qty-badge-glow flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
+              >
+                <span
+                  class="text-[13px] sm:text-base md:text-lg font-extrabold text-white leading-none"
+                  >১<span class="text-[8px] sm:text-[10px] md:text-xs"
+                    >টি</span
+                  ></span
+                >
+              </div>
+              <div class="min-w-0 flex-1">
+                <h3
+                  class="text-[12px] sm:text-[14px] md:text-[17px] font-extrabold text-toy-dark leading-tight group-hover:text-toy-blue transition-colors truncate"
+                >
+                  মেইন সিঁড়ির বেস
+                </h3>
+                <p
+                  class="text-[9px] sm:text-[10px] md:text-xs text-slate-500 mt-0.5 md:mt-1 font-medium leading-tight opacity-80 truncate"
+                >
+                  অডিও ও লাইট সিস্টেম
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="premium-glass group animate-fade-in-up delay-200 rounded-[1.25rem] md:rounded-[2rem] flex flex-col relative overflow-hidden"
+          >
+            <div
+              class="w-full aspect-square img-spotlight bg-white/20 flex items-center justify-center relative overflow-hidden border-b border-white/40"
+            >
+              <img
+                decoding="async"
+                src="https://media.base44.com/images/public/user_69e3646d8e6da690d1e2ae37/f991f7e71_9PcsDuck.jpg"
+                alt="কিউট হলুদ হাঁস"
+                class="w-full h-full object-cover mix-blend-darken transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
+            <div
+              class="flex items-center gap-2 md:gap-3 w-full text-left p-2.5 sm:p-3 md:p-5"
+            >
+              <div
+                class="shrink-0 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-[8px] md:rounded-xl qty-badge-glow flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+              >
+                <span
+                  class="text-[13px] sm:text-base md:text-lg font-extrabold text-white leading-none"
+                  >৯<span class="text-[8px] sm:text-[10px] md:text-xs"
+                    >টি</span
+                  ></span
+                >
+              </div>
+              <div class="min-w-0 flex-1">
+                <h3
+                  class="text-[12px] sm:text-[14px] md:text-[17px] font-extrabold text-toy-dark leading-tight group-hover:text-toy-blue transition-colors truncate"
+                >
+                  কিউট হলুদ হাঁস
+                </h3>
+                <p
+                  class="text-[9px] sm:text-[10px] md:text-xs text-slate-500 mt-0.5 md:mt-1 font-medium leading-tight opacity-80 truncate"
+                >
+                  মেটাল রোলার যুক্ত
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="premium-glass group animate-fade-in-up delay-300 rounded-[1.25rem] md:rounded-[2rem] flex flex-col relative overflow-hidden"
+          >
+            <div
+              class="w-full aspect-square img-spotlight bg-white/20 flex items-center justify-center relative overflow-hidden border-b border-white/40"
+            >
+              <img
+                decoding="async"
+                src="https://media.base44.com/images/public/user_69e3646d8e6da690d1e2ae37/71c1a61cf_Slider.jpg"
+                alt="স্লাইডার ট্র্যাক"
+                class="w-full h-full object-cover mix-blend-darken transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
+            <div
+              class="flex items-center gap-2 md:gap-3 w-full text-left p-2.5 sm:p-3 md:p-5"
+            >
+              <div
+                class="shrink-0 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-[8px] md:rounded-xl qty-badge-glow flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
+              >
+                <span
+                  class="text-[13px] sm:text-base md:text-lg font-extrabold text-white leading-none"
+                  >৩<span class="text-[8px] sm:text-[10px] md:text-xs"
+                    >টি</span
+                  ></span
+                >
+              </div>
+              <div class="min-w-0 flex-1">
+                <h3
+                  class="text-[12px] sm:text-[14px] md:text-[17px] font-extrabold text-toy-dark leading-tight group-hover:text-toy-blue transition-colors truncate"
+                >
+                  স্লাইডার ট্র্যাক
+                </h3>
+                <p
+                  class="text-[9px] sm:text-[10px] md:text-xs text-slate-500 mt-0.5 md:mt-1 font-medium leading-tight opacity-80 truncate"
+                >
+                  কার্ভড ও নীল রঙের
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="premium-glass group animate-fade-in-up delay-400 rounded-[1.25rem] md:rounded-[2rem] flex flex-col relative overflow-hidden"
+          >
+            <div
+              class="w-full aspect-square img-spotlight bg-white/20 flex items-center justify-center relative overflow-hidden border-b border-white/40"
+            >
+              <img
+                decoding="async"
+                src="https://media.base44.com/images/public/user_69e3646d8e6da690d1e2ae37/294d6c371_SmallDuck-Coverv10.jpg"
+                alt="ডেকোরেটিভ আর্চ"
+                class="w-full h-full object-cover mix-blend-darken transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
+            <div
+              class="flex items-center gap-2 md:gap-3 w-full text-left p-2.5 sm:p-3 md:p-5"
+            >
+              <div
+                class="shrink-0 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-[8px] md:rounded-xl qty-badge-glow flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+              >
+                <span
+                  class="text-[13px] sm:text-base md:text-lg font-extrabold text-white leading-none"
+                  >১<span class="text-[8px] sm:text-[10px] md:text-xs"
+                    >টি</span
+                  ></span
+                >
+              </div>
+              <div class="min-w-0 flex-1">
+                <h3
+                  class="text-[12px] sm:text-[14px] md:text-[17px] font-extrabold text-toy-dark leading-tight group-hover:text-toy-blue transition-colors truncate"
+                >
+                  ডেকোরেটিভ আর্চ
+                </h3>
+                <p
+                  class="text-[9px] sm:text-[10px] md:text-xs text-slate-500 mt-0.5 md:mt-1 font-medium leading-tight opacity-80 truncate"
+                >
+                  'Small Duck' প্রিন্ট
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 md:mt-10 max-w-sm md:max-w-md mx-auto flex flex-col gap-3 animate-fade-in-up delay-400"
+        >
+          <a
+            href="#sa-checkout-area"
+            class="cta-btn w-full bg-gradient-to-r from-toy-pink to-[#FF3344] text-white rounded-xl py-2 md:py-2.5 px-6 flex items-center justify-center gap-2.5 border border-white/20"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-6 h-6 shrink-0"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="8" cy="21" r="1" />
+              <circle cx="19" cy="21" r="1" />
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              />
+            </svg>
+            <span
+              class="text-[20px] md:text-2xl font-extrabold tracking-wide pt-0.5"
+              >অর্ডার করতে চাই</span
+            >
+          </a>
+          <div class="flex gap-3 w-full">
+            <a
+              href="https://wa.link/s1j832"
+              target="_blank"
+              class="cta-btn flex-1 bg-gradient-to-r from-[#25D366] to-[#1DA851] text-white rounded-xl py-1.5 md:py-2 px-2 md:px-3 flex items-center justify-center gap-1.5 border border-white/20"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 md:w-5 md:h-5 shrink-0"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+                />
+              </svg>
+              <span class="text-[13px] md:text-[15px] font-bold pt-0.5"
+                >হোয়াটসঅ্যাপ</span
+              >
+            </a>
+            <a
+              href="tel:+8809643330000"
+              class="cta-btn flex-1 bg-gradient-to-r from-toy-blue to-[#0066FF] text-white rounded-xl py-1.5 md:py-2 px-2 md:px-3 flex items-center justify-center gap-1.5 border border-white/20"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 md:w-5 md:h-5 shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                />
+              </svg>
+              <span class="text-[13px] md:text-[15px] font-bold pt-0.5"
+                >কল করুন</span
+              >
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ FAQ ============================================================ -->
+    <section class="py-10 md:py-16 bg-transparent relative overflow-hidden">
+      <div
+        class="absolute top-10 -right-20 w-[400px] md:w-[500px] h-[400px] md:h-[500px] rounded-full bg-toy-blue/10 blur-[90px] -z-10 blob-shape"
+      ></div>
+      <div
+        class="absolute bottom-10 -left-20 w-[450px] md:w-[600px] h-[450px] md:h-[600px] rounded-full bg-toy-yellow/10 blur-[90px] -z-10 blob-shape"
+        style="animation-delay: -3s"
+      ></div>
+
+      <div class="max-w-[800px] mx-auto px-5 md:px-8 relative z-10">
+        <div class="text-center mb-8 md:mb-10 animate-fade-in-up">
+          <h2
+            class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-toy-dark tracking-tight leading-tight"
+          >
+            প্রোডাক্টটি সম্মন্ধে
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-toy-blue to-purple-500"
+              >সাধারণ কিছু জিজ্ঞাসা</span
+            >
+          </h2>
+        </div>
+
+        <div class="flex flex-col gap-3 md:gap-4">
+          <div
+            class="faq-item animate-fade-in-up delay-100 rounded-xl md:rounded-[1.25rem] cursor-pointer group"
+          >
+            <div
+              class="faq-header flex justify-between items-center px-5 py-4 md:px-6 md:py-5 select-none"
+            >
+              <h3
+                class="faq-title text-[15px] md:text-[17px] font-extrabold text-toy-dark leading-snug transition-colors group-hover:text-toy-blue pr-4"
+              >
+                প্রোডাক্টটি কি ব্যাটারি চালিত?
+              </h3>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="faq-icon w-5 h-5 shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </div>
+            <div class="faq-answer-grid">
+              <div class="faq-answer-inner">
+                <div class="px-5 pb-4 md:px-6 md:pb-5">
+                  <p
+                    class="text-[13px] md:text-[15px] text-slate-600 font-medium leading-relaxed pt-3 border-t border-slate-200"
+                  >
+                    হ্যাঁ, এটি AA ব্যাটারি দিয়ে চলে। ব্যাটারি প্যাকেজে
+                    অন্তর্ভুক্ত নয়।
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="faq-item animate-fade-in-up delay-200 rounded-xl md:rounded-[1.25rem] cursor-pointer group"
+          >
+            <div
+              class="faq-header flex justify-between items-center px-5 py-4 md:px-6 md:py-5 select-none"
+            >
+              <h3
+                class="faq-title text-[15px] md:text-[17px] font-extrabold text-toy-dark leading-snug transition-colors group-hover:text-toy-blue pr-4"
+              >
+                কত বছরের বাচ্চার জন্য উপযোগী?
+              </h3>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="faq-icon w-5 h-5 shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </div>
+            <div class="faq-answer-grid">
+              <div class="faq-answer-inner">
+                <div class="px-5 pb-4 md:px-6 md:pb-5">
+                  <p
+                    class="text-[13px] md:text-[15px] text-slate-600 font-medium leading-relaxed pt-3 border-t border-slate-200"
+                  >
+                    ৩ বছর ও তদূর্ধ্ব বাচ্চাদের জন্য উপযুক্ত। ছোট বাচ্চাদের
+                    অভিভাবকের তত্ত্বাবধানে খেলতে দিন।
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="faq-item animate-fade-in-up delay-300 rounded-xl md:rounded-[1.25rem] cursor-pointer group"
+          >
+            <div
+              class="faq-header flex justify-between items-center px-5 py-4 md:px-6 md:py-5 select-none"
+            >
+              <h3
+                class="faq-title text-[15px] md:text-[17px] font-extrabold text-toy-dark leading-snug transition-colors group-hover:text-toy-blue pr-4"
+              >
+                ডেলিভারিতে কত সময় লাগবে?
+              </h3>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="faq-icon w-5 h-5 shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </div>
+            <div class="faq-answer-grid">
+              <div class="faq-answer-inner">
+                <div class="px-5 pb-4 md:px-6 md:pb-5">
+                  <p
+                    class="text-[13px] md:text-[15px] text-slate-600 font-medium leading-relaxed pt-3 border-t border-slate-200"
+                  >
+                    ঢাকায় ১-২ দিন, ঢাকার বাইরে ২-৪ দিনের মধ্যে ডেলিভারি।
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="faq-item animate-fade-in-up delay-400 rounded-xl md:rounded-[1.25rem] cursor-pointer group"
+          >
+            <div
+              class="faq-header flex justify-between items-center px-5 py-4 md:px-6 md:py-5 select-none"
+            >
+              <h3
+                class="faq-title text-[15px] md:text-[17px] font-extrabold text-toy-dark leading-snug transition-colors group-hover:text-toy-blue pr-4"
+              >
+                পণ্য পছন্দ না হলে কি ফেরত দেওয়া যাবে?
+              </h3>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="faq-icon w-5 h-5 shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </div>
+            <div class="faq-answer-grid">
+              <div class="faq-answer-inner">
+                <div class="px-5 pb-4 md:px-6 md:pb-5">
+                  <p
+                    class="text-[13px] md:text-[15px] text-slate-600 font-medium leading-relaxed pt-3 border-t border-slate-200"
+                  >
+                    ডেলিভারির সময় চেক করে তারপর গ্রহণ করুন। ম্যানুফ্যাকচারিং
+                    ত্রুটি থাকলে ৭ দিনের মধ্যে রিপ্লেসমেন্ট।
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="faq-item animate-fade-in-up delay-500 rounded-xl md:rounded-[1.25rem] cursor-pointer group"
+          >
+            <div
+              class="faq-header flex justify-between items-center px-5 py-4 md:px-6 md:py-5 select-none"
+            >
+              <h3
+                class="faq-title text-[15px] md:text-[17px] font-extrabold text-toy-dark leading-snug transition-colors group-hover:text-toy-blue pr-4"
+              >
+                মিউজিক ও LED লাইট কি বন্ধ করা যায়?
+              </h3>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="faq-icon w-5 h-5 shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </div>
+            <div class="faq-answer-grid">
+              <div class="faq-answer-inner">
+                <div class="px-5 pb-4 md:px-6 md:pb-5">
+                  <p
+                    class="text-[13px] md:text-[15px] text-slate-600 font-medium leading-relaxed pt-3 border-t border-slate-200"
+                  >
+                    হ্যাঁ, বেসে অন/অফ সুইচ আছে — ইচ্ছে মতো নিয়ন্ত্রণ করতে
+                    পারবেন।
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ CHECKOUT ============================================================ -->
+    <section class="pb-16 pt-4">
+      <div class="sa-wrapper" id="sa-checkout-area">
+        <form id="sa-order-form">
+          <div class="sa-row">
+            <div class="sa-col-left">
+              <div class="sa-heading">
+                আপনার পছন্দের প্রোডাক্টটি নির্বাচন করুন:
+              </div>
+
+              <div class="sa-pc-card-hz">
+                <div class="sa-pc-card-hz-img">
+                  <img
+                    src="https://shop.prodhan.com/wp-content/uploads/2026/04/Small-Duck-Cover-v1.0-300x300.jpg"
+                    alt="Small Duck Toy"
+                  />
+                </div>
+                <div class="sa-pc-card-hz-content">
+                  <div class="sa-discount-badge">-58%</div>
+                  <h3 class="sa-pc-card-hz-title">Small Duck Toy</h3>
+                  <div>
+                    <span class="hero-red-cut" style="font-size: 13px"
+                      >৳1900</span
+                    >
+                    <span
+                      style="
+                        font-size: 17px;
+                        font-weight: 800;
+                        color: #ea580c;
+                        margin-left: 6px;
+                      "
+                      >৳799</span
+                    >
+                  </div>
+                </div>
+                <div class="sa-pc-btn-wrap">
+                  <button
+                    type="button"
+                    class="sa-pc-btn sa-add-init"
+                    data-id="16701"
+                    data-price="799"
+                    data-name="Small Duck Toy"
+                    data-img="https://shop.prodhan.com/wp-content/uploads/2026/04/Small-Duck-Cover-v1.0-150x150.jpg"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="16"
+                      height="16"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="9" cy="21" r="1"></circle>
+                      <circle cx="20" cy="21" r="1"></circle>
+                      <path
+                        d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                      ></path>
+                    </svg>
+                    Add to Cart
+                  </button>
+                  <div class="sa-qty-ctrl" id="sa-qty-ctrl-16701">
+                    <button
+                      type="button"
+                      class="sa-qty-btn sa-qty-minus"
+                      data-id="16701"
+                    >
+                      -
+                    </button>
+                    <span class="sa-qty-val" id="sa-qty-val-16701">1</span>
+                    <button
+                      type="button"
+                      class="sa-qty-btn sa-qty-plus"
+                      data-id="16701"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="sa-heading"
+                style="
+                  font-size: 15px;
+                  margin-top: 15px;
+                  margin-bottom: 6px;
+                  color: #555;
+                "
+              >
+                আপনার জন্য আরও রিকমেন্ডেড:
+              </div>
+              <div class="sa-rec-grid">
+                <div class="sa-rec-card">
+                  <div class="sa-rec-img-wrap">
+                    <img
+                      src="https://shop.prodhan.com/wp-content/uploads/2026/04/Talking-book-For-hero-section-150x150.png"
+                      alt=""
+                      class="sa-rec-img"
+                    />
+                  </div>
+                  <h3 class="sa-rec-title">Intelligence Talking Book</h3>
+                  <div
+                    style="font-size: 14px; font-weight: 700; color: #f97316"
+                  >
+                    ৳1500
+                  </div>
+                  <div class="sa-rec-btn-wrap">
+                    <button
+                      type="button"
+                      class="sa-pc-btn sa-rec-add-btn sa-add-init"
+                      data-id="12919"
+                      data-price="1500"
+                      data-name="Intelligence Talking Book"
+                      data-img="https://shop.prodhan.com/wp-content/uploads/2026/04/Talking-book-For-hero-section-150x150.png"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="12"
+                        height="12"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path
+                          d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                        ></path>
+                      </svg>
+                      <span>Add to Cart</span>
+                    </button>
+                    <div class="sa-qty-ctrl" id="sa-qty-ctrl-12919">
+                      <button
+                        type="button"
+                        class="sa-qty-btn sa-qty-minus"
+                        data-id="12919"
+                      >
+                        -
+                      </button>
+                      <span class="sa-qty-val" id="sa-qty-val-12919">1</span>
+                      <button
+                        type="button"
+                        class="sa-qty-btn sa-qty-plus"
+                        data-id="12919"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sa-rec-card">
+                  <div class="sa-rec-img-wrap">
+                    <img
+                      src="https://shop.prodhan.com/wp-content/uploads/2026/04/Product_photo_white_202604041744-150x150.jpeg"
+                      alt=""
+                      class="sa-rec-img"
+                    />
+                  </div>
+                  <h3 class="sa-rec-title">Talking Flash Card</h3>
+                  <div
+                    style="font-size: 14px; font-weight: 700; color: #f97316"
+                  >
+                    ৳1300
+                  </div>
+                  <div class="sa-rec-btn-wrap">
+                    <button
+                      type="button"
+                      class="sa-pc-btn sa-rec-add-btn sa-add-init"
+                      data-id="12464"
+                      data-price="1300"
+                      data-name="Talking Flash Card"
+                      data-img="https://shop.prodhan.com/wp-content/uploads/2026/04/Product_photo_white_202604041744-150x150.jpeg"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="12"
+                        height="12"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path
+                          d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                        ></path>
+                      </svg>
+                      <span>Add to Cart</span>
+                    </button>
+                    <div class="sa-qty-ctrl" id="sa-qty-ctrl-12464">
+                      <button
+                        type="button"
+                        class="sa-qty-btn sa-qty-minus"
+                        data-id="12464"
+                      >
+                        -
+                      </button>
+                      <span class="sa-qty-val" id="sa-qty-val-12464">1</span>
+                      <button
+                        type="button"
+                        class="sa-qty-btn sa-qty-plus"
+                        data-id="12464"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sa-heading" style="margin-top: 20px">
+                আপনার তথ্য দিন:
+              </div>
+              <div class="sa-input-group">
+                <input
+                  type="text"
+                  name="assi_name"
+                  id="assi_name"
+                  class="sa-input"
+                  placeholder="আপনার নাম"
+                  required
+                />
+              </div>
+              <div class="sa-input-group">
+                <input
+                  type="tel"
+                  name="assi_phone"
+                  id="assi_phone"
+                  class="sa-input"
+                  placeholder="মোবাইল নাম্বার (০১XXXXXXXXX)"
+                  required
+                  pattern="^01[0-9]{9}$"
+                />
+              </div>
+              <div class="sa-input-group" style="margin-bottom: 0">
+                <textarea
+                  name="assi_address"
+                  id="assi_address"
+                  class="sa-input"
+                  rows="2"
+                  placeholder="সম্পূর্ণ ঠিকানা"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="sa-success-banner" id="sa-success-banner">
+                ✅ ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে। শীঘ্রই আমরা
+                আপনার সাথে যোগাযোগ করব।
+              </div>
+            </div>
+
+            <div class="sa-col-right">
+              <div class="sa-heading">ডেলিভারি এরিয়া:</div>
+              <label class="sa-delivery-box active">
+                <input
+                  type="radio"
+                  name="assi_shipping_method"
+                  value="60"
+                  class="sa-radio-input"
+                  checked
+                />
+                <div class="sa-delivery-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
+                    />
+                  </svg>
+                </div>
+                <div class="sa-delivery-text">
+                  <strong>ঢাকার ভিতরে</strong
+                  ><span>চার্জ প্রযোজ্য হবে - ৬০ টাকা</span>
+                </div>
+              </label>
+              <label class="sa-delivery-box">
+                <input
+                  type="radio"
+                  name="assi_shipping_method"
+                  value="110"
+                  class="sa-radio-input"
+                />
+                <div class="sa-delivery-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
+                    />
+                  </svg>
+                </div>
+                <div class="sa-delivery-text">
+                  <strong>ঢাকার বাহিরে</strong
+                  ><span>চার্জ প্রযোজ্য হবে - ১১০ টাকা</span>
+                </div>
+              </label>
+
+              <div class="sa-heading" style="margin-top: 30px">
+                অর্ডার সামারি:
+              </div>
+              <table class="sa-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody id="sa-dynamic-cart-items">
+                  <tr>
+                    <td
+                      colspan="2"
+                      style="text-align: center; padding: 20px; color: #94a3b8"
+                    >
+                      কার্টে কোনো প্রোডাক্ট নেই।
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <td>Subtotal</td>
+                    <td>৳<span id="sa-subtotal-summary">0.00</span></td>
+                  </tr>
+                  <tr>
+                    <td>Delivery</td>
+                    <td>৳<span id="sa-del-charge">0.00</span></td>
+                  </tr>
+                  <tr class="sa-total-row">
+                    <td>Total</td>
+                    <td>৳<span id="sa-total">0.00</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <button
+                type="submit"
+                class="sa-btn sa-btn-desktop"
+                id="sa-btn-desktop"
+                disabled
+              >
+                অর্ডার করুন ৳<span id="sa-btn-total-desktop">0.00</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="sa-mobile-sticky">
+            <div class="sa-mobile-price">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="margin-right: 6px"
+              >
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path
+                  d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                ></path>
+              </svg>
+              <div
+                style="display: flex; flex-direction: column; line-height: 1.1"
+              >
+                <span style="font-size: 12px; color: #666">মোট</span>
+                <span>৳<span id="sa-mobile-total">0.00</span></span>
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="sa-mobile-btn"
+              id="sa-btn-mobile"
+              disabled
+            >
+              অর্ডার করুন
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============================================================ SCRIPTS ============================================================ -->
+    <script>
+      // ---------- FAQ Accordion ----------
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        item
+          .querySelector(".faq-header")
+          .addEventListener("click", () => item.classList.toggle("active"));
+      });
+
+      // ---------- Countdown timer + sticky header ----------
+      (function () {
+        let timerInterval;
+        let startTime, endTime;
+
+        function initOfferTimer() {
+          const RESET_INTERVAL_MS = 31 * 60 * 1000;
+          const now = Date.now();
+          startTime = now;
+          const randomMins = Math.floor(Math.random() * (29 - 20 + 1)) + 20;
+          const randomSecs = Math.floor(Math.random() * 60);
+          endTime = now + (randomMins * 60 + randomSecs) * 1000;
+
+          function update() {
+            const currentTime = Date.now();
+            if (currentTime - startTime > RESET_INTERVAL_MS) {
+              clearInterval(timerInterval);
+              initOfferTimer();
+              return;
+            }
+            let diff = Math.max(0, endTime - currentTime);
+            const minutes = Math.floor((diff % 3600000) / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
+            const m = String(minutes).padStart(2, "0");
+            const s = String(seconds).padStart(2, "0");
+            document.getElementById("offer-mins").textContent = m;
+            document.getElementById("offer-secs").textContent = s;
+            document.getElementById("sticky-offer-mins").textContent = m;
+            document.getElementById("sticky-offer-secs").textContent = s;
+          }
+          update();
+          timerInterval = setInterval(update, 1000);
+        }
+        initOfferTimer();
+
+        const mainOfferSection = document.getElementById("main-offer-section");
+        const stickyHeader = document.getElementById("sticky-offer-header");
+        if (mainOfferSection && stickyHeader) {
+          const obs = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) {
+                  stickyHeader.classList.remove("-translate-y-full");
+                  stickyHeader.classList.add("translate-y-0");
+                } else {
+                  stickyHeader.classList.add("-translate-y-full");
+                  stickyHeader.classList.remove("translate-y-0");
+                }
+              });
+            },
+            { threshold: 0.1 },
+          );
+          obs.observe(mainOfferSection);
+        }
+      })();
+
+      // ---------- Cart / Checkout logic ----------
+      (function () {
+        const cart = {}; // id -> {name, price, img, qty}
+        let shippingCost = 60;
+
+        function fmt(n) {
+          return n.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          });
+        }
+
+        function renderCart() {
+          const tbody = document.getElementById("sa-dynamic-cart-items");
+          const ids = Object.keys(cart);
+          if (ids.length === 0) {
+            tbody.innerHTML =
+              '<tr><td colspan="2" style="text-align:center; padding:20px; color:#94a3b8;">কার্টে কোনো প্রোডাক্ট নেই।</td></tr>';
+          } else {
+            tbody.innerHTML = ids
+              .map((id) => {
+                const it = cart[id];
+                const lineTotal = it.price * it.qty;
+                return `<tr><td>${it.name} <span style="color:#94a3b8;">x${it.qty}</span></td><td>${fmt(lineTotal)}</td></tr>`;
+              })
+              .join("");
+          }
+
+          const subtotal = ids.reduce(
+            (sum, id) => sum + cart[id].price * cart[id].qty,
+            0,
+          );
+          const delivery = ids.length > 0 ? shippingCost : 0;
+          const total = subtotal + delivery;
+
+          document.getElementById("sa-subtotal-summary").textContent =
+            fmt(subtotal);
+          document.getElementById("sa-del-charge").textContent = fmt(delivery);
+          document.getElementById("sa-total").textContent = fmt(total);
+          document.getElementById("sa-mobile-total").textContent = fmt(total);
+          document.getElementById("sa-btn-total-desktop").textContent =
+            fmt(total);
+
+          const hasItems = ids.length > 0;
+          document.getElementById("sa-btn-desktop").disabled = !hasItems;
+          document.getElementById("sa-btn-mobile").disabled = !hasItems;
+        }
+
+        function setQtyUI(id) {
+          const it = cart[id];
+          const btnInit = document.querySelector(
+            `.sa-add-init[data-id="${id}"]`,
+          );
+          const ctrl = document.getElementById("sa-qty-ctrl-" + id);
+          if (!it || it.qty <= 0) {
+            if (btnInit) btnInit.style.display = "flex";
+            if (ctrl) ctrl.classList.remove("show");
+            delete cart[id];
+          } else {
+            if (btnInit) btnInit.style.display = "none";
+            if (ctrl) ctrl.classList.add("show");
+            document.getElementById("sa-qty-val-" + id).textContent = it.qty;
+          }
+        }
+
+        document.querySelectorAll(".sa-add-init").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const id = btn.dataset.id;
+            cart[id] = {
+              name: btn.dataset.name,
+              price: parseFloat(btn.dataset.price),
+              img: btn.dataset.img,
+              qty: 1,
+            };
+            setQtyUI(id);
+            renderCart();
+          });
+        });
+
+        document.querySelectorAll(".sa-qty-plus").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const id = btn.dataset.id;
+            if (cart[id]) {
+              cart[id].qty++;
+              setQtyUI(id);
+              renderCart();
+            }
+          });
+        });
+
+        document.querySelectorAll(".sa-qty-minus").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const id = btn.dataset.id;
+            if (cart[id]) {
+              cart[id].qty--;
+              setQtyUI(id);
+              renderCart();
+            }
+          });
+        });
+
+        document.querySelectorAll(".sa-radio-input").forEach((radio) => {
+          radio.addEventListener("change", () => {
+            shippingCost = parseFloat(radio.value);
+            document
+              .querySelectorAll(".sa-delivery-box")
+              .forEach((box) => box.classList.remove("active"));
+            radio.closest(".sa-delivery-box").classList.add("active");
+            renderCart();
+          });
+        });
+
+        // Auto add main product on load (Small Duck Toy)
+        document.querySelector('.sa-add-init[data-id="16701"]').click();
+
+        // Form submit
+        document
+          .getElementById("sa-order-form")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            const ids = Object.keys(cart);
+            if (ids.length === 0) return;
+
+            const name = document.getElementById("assi_name").value.trim();
+            const phone = document.getElementById("assi_phone").value.trim();
+            const address = document
+              .getElementById("assi_address")
+              .value.trim();
+
+            if (!name || !phone || !address) {
+              alert("অনুগ্রহ করে সব তথ্য পূরণ করুন।");
+              return;
+            }
+            if (!/^01[0-9]{9}$/.test(phone)) {
+              alert("সঠিক মোবাইল নাম্বার দিন (০১XXXXXXXXX)।");
+              return;
+            }
+
+            const banner = document.getElementById("sa-success-banner");
+            banner.classList.add("show");
+            banner.scrollIntoView({ behavior: "smooth", block: "center" });
+
+            document.getElementById("sa-btn-desktop").disabled = true;
+            document.getElementById("sa-btn-mobile").disabled = true;
+            this.querySelectorAll("input, textarea, button").forEach(
+              (el) => (el.disabled = true),
+            );
+          });
+
+        renderCart();
+      })();
+    </script>
+  </body>
+</html>
