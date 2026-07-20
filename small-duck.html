@@ -25,7 +25,7 @@
               "toy-yellow": "#FFE100",
               "toy-blue": "#2196F3",
               //   "toy-pink": "#FF6B81",
-              "toy-pink": "#FF45AA",
+              "toy-pink": "#d61a3c",
               "toy-dark": "#1E293B",
               "toy-deep-blue": "#0F172A",
             },
@@ -141,11 +141,19 @@
       .hero-btn {
         position: relative;
         overflow: hidden;
-        background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%);
+        background: linear-gradient(135deg, #c4001d 0%, #990016 100%);
+        color: #fff;
         transition: all 0.3s ease;
         animation: heroWiggleButton 3s infinite ease-in-out;
         z-index: 1;
         text-decoration: none !important;
+        box-shadow: 0 10px 25px rgba(196, 0, 29, 0.3);
+      }
+
+      .hero-btn:hover {
+        background: linear-gradient(135deg, #d50024 0%, #b00020 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 15px 35px rgba(196, 0, 29, 0.45);
       }
       .hero-btn > * {
         position: relative;
@@ -858,7 +866,7 @@
                   <div
                     class="inline-block mt-2 bg-green-100/80 text-[#2E7D32] px-3 py-1 hero-tag-cut text-xs md:text-sm font-extrabold"
                   >
-                    সাশ্রয় ১১০১৳ (৫৮%)
+                    সাশ্রয় ৫০১৳ (৩৯%)
                   </div>
                 </div>
                 <a
@@ -1034,8 +1042,6 @@
             সময়টা হয় নিরাপদ ও আনন্দময়।
           </p>
         </div>
-
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-5">
           <div
             class="dark-glass-card group animate-fade-in-up delay-100 rounded-2xl md:rounded-3xl p-3 md:p-5 flex flex-col relative overflow-hidden"
           >
@@ -1262,8 +1268,12 @@
               জন্য সম্পূর্ণ নিরাপদ।
             </p>
           </div>
-        </div>
+        </div> -->
 
+         <div
+          id="featureItems"
+          class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-5"
+        ></div>
         <div
           class="mt-8 md:mt-10 max-w-sm md:max-w-md mx-auto flex flex-col gap-3 animate-fade-in-up delay-600"
         >
@@ -2285,8 +2295,8 @@
       container.innerHTML = boxItems
         .map(
           (item, index) => `
-<div class="premium-glass group animate-fade-in-up delay-${(index + 1) * 100}
-rounded-[1.25rem] md:rounded-[2rem] flex flex-col relative overflow-hidden">
+<div class="premium-glass group animate-fade-in-up border border-[#EBEFF7] rounded-3xl delay-${(index + 1) * 100}
+rounded-[1.3rem] md:rounded-[1.3rem] flex flex-col relative overflow-hidden">
 
     <div class="w-full aspect-square img-spotlight bg-white/20 flex items-center justify-center relative overflow-hidden border-b border-white/40">
         <img
@@ -2327,6 +2337,81 @@ rounded-[1.25rem] md:rounded-[2rem] flex flex-col relative overflow-hidden">
         )
         .join("");
 
+      /* ══ Features section is here ══ */
+      const featureItems = [
+        {
+          title: "অটোমেটিক ক্লাইম্বিং সিস্টেম",
+          desc: "হাঁসগুলো স্বয়ংক্রিয়ভাবে সিঁড়ি বেয়ে উঠে আবার স্লাইড ট্র্যাক দিয়ে মসৃণভাবে নেমে আসে।",
+          icon: `<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" />`,
+        },
+        {
+          title: "কালারফুল LED লাইট",
+          desc: "সিঁড়ির প্রতিটি ধাপে আকর্ষণীয় ফ্ল্যাশিং LED আলো, যা বাচ্চাদের দৃষ্টি মুহূর্তেই ধরে রাখবে।",
+          icon: `<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                 <path d="M9 18h6" />
+                 <path d="M10 22h4" />`,
+        },
+        {
+          title: "আনন্দদায়ক মিউজিক",
+          desc: "বিল্ট-ইন মিউজিক সিস্টেম সহ — খেলার সময় মজার ও মিষ্টি সুর বাজবে অবিরাম।",
+          icon: `<circle cx="8" cy="18" r="4" />
+                 <path d="M12 18V2l7 4" />`,
+        },
+        {
+          title: "স্মুথ মেটাল রোলার",
+          desc: "৯টি হাঁসের প্রতিটির নিচে রয়েছে মেটাল রোলার, যা ট্র্যাকে মসৃণ স্লাইডিং নিশ্চিত করে।",
+          icon: `<path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" />
+                 <path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+                 <path d="M12 2v2" />
+                 <path d="M12 22v-2" />
+                 <path d="m17 20.66-1-1.73" />
+                 <path d="M11 10.27 7 3.34" />
+                 <path d="m20.66 17-1.73-1" />
+                 <path d="m3.34 7 1.73 1" />
+                 <path d="M14 12h8" />
+                 <path d="M2 12h2" />
+                 <path d="m20.66 7-1.73 1" />
+                 <path d="m3.34 17 1.73-1" />
+                 <path d="m17 3.34-1 1.73" />
+                 <path d="m11 13.73-4 6.93" />`,
+        },
+        {
+          title: "সহজ অ্যাসেম্বলি",
+          desc: "৩টি স্লাইডার ট্র্যাক সহজেই জোড়া লাগানো যায় — বাচ্চারা বড়দের সাহায্য ছাড়াই সেটআপ করতে পারবে।",
+          icon: `<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />`,
+        },
+        {
+          title: "১০০% নিরাপদ ABS প্লাস্টিক",
+          desc: "নন-টক্সিক ম্যাটেরিয়ালে তৈরি, কোনো ধারালো প্রান্ত নেই — বাচ্চাদের জন্য সম্পূর্ণ নিরাপদ।",
+          icon: `<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+                 <path d="m9 12 2 2 4-4" />`,
+        },
+      ];
+
+      const featureContainer = document.getElementById("featureItems");
+
+      featureContainer.innerHTML = featureItems
+        .map((item, index) => {
+          const delay = (index + 1) * 100;
+          const rotate = index % 2 === 0 ? "-rotate-6" : "rotate-6";
+          return `
+<div class="dark-glass-card group animate-fade-in-up delay-${delay} rounded-2xl md:rounded-3xl p-3 md:p-5 flex flex-col relative overflow-hidden">
+  <div class="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+    <div class="shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-[8px] md:rounded-xl icon-wrapper-gradient flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:${rotate}">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 md:w-6 md:h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        ${item.icon}
+      </svg>
+    </div>
+    <h3 class="text-[12px] sm:text-[14px] md:text-lg font-extrabold text-white leading-tight group-hover:text-toy-yellow transition-colors">
+      ${item.title}
+    </h3>
+  </div>
+  <p class="text-[10px] sm:text-[11px] md:text-[13px] text-slate-300 font-medium leading-relaxed opacity-90">
+    ${item.desc}
+  </p>
+</div>`;
+        })
+        .join("");
       // ---------- FAQ Accordion ----------
       document.querySelectorAll(".faq-item").forEach((item) => {
         item
